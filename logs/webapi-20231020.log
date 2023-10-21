@@ -1,0 +1,747 @@
+[2023-10-20 19:09:50.656 -05:00 INF] Executed DbCommand (11ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE DATABASE `DiegoRopa`;
+[2023-10-20 19:09:50.848 -05:00 INF] Executed DbCommand (44ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `__EFMigrationsHistory` (
+    `MigrationId` varchar(150) CHARACTER SET utf8mb4 NOT NULL,
+    `ProductVersion` varchar(32) CHARACTER SET utf8mb4 NOT NULL,
+    CONSTRAINT `PK___EFMigrationsHistory` PRIMARY KEY (`MigrationId`)
+) CHARACTER SET=utf8mb4;
+[2023-10-20 19:09:50.880 -05:00 INF] Executed DbCommand (14ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='DiegoRopa' AND TABLE_NAME='__EFMigrationsHistory';
+[2023-10-20 19:09:50.889 -05:00 INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `MigrationId`, `ProductVersion`
+FROM `__EFMigrationsHistory`
+ORDER BY `MigrationId`;
+[2023-10-20 19:09:50.915 -05:00 INF] Applying migration '20231021000822_initialmigration'.
+[2023-10-20 19:09:51.063 -05:00 INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER DATABASE CHARACTER SET utf8mb4;
+[2023-10-20 19:09:51.083 -05:00 INF] Executed DbCommand (21ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `cargo` (
+    `Id` int NOT NULL AUTO_INCREMENT,
+    `descripcion` varchar(50) CHARACTER SET utf8mb4 NOT NULL,
+    `sueldobase` double NOT NULL,
+    CONSTRAINT `PK_cargo` PRIMARY KEY (`Id`)
+) CHARACTER SET=utf8mb4;
+[2023-10-20 19:09:51.106 -05:00 INF] Executed DbCommand (22ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `color` (
+    `Id` int NOT NULL AUTO_INCREMENT,
+    `descripcion` varchar(50) CHARACTER SET utf8mb4 NOT NULL,
+    CONSTRAINT `PK_color` PRIMARY KEY (`Id`)
+) CHARACTER SET=utf8mb4;
+[2023-10-20 19:09:51.128 -05:00 INF] Executed DbCommand (22ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `formapago` (
+    `Id` int NOT NULL AUTO_INCREMENT,
+    `descripcion` varchar(50) CHARACTER SET utf8mb4 NOT NULL,
+    CONSTRAINT `PK_formapago` PRIMARY KEY (`Id`)
+) CHARACTER SET=utf8mb4;
+[2023-10-20 19:09:51.152 -05:00 INF] Executed DbCommand (23ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `genero` (
+    `Id` int NOT NULL AUTO_INCREMENT,
+    `descripcion` varchar(50) CHARACTER SET utf8mb4 NOT NULL,
+    CONSTRAINT `PK_genero` PRIMARY KEY (`Id`)
+) CHARACTER SET=utf8mb4;
+[2023-10-20 19:09:51.181 -05:00 INF] Executed DbCommand (28ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `insumo` (
+    `Id` int NOT NULL AUTO_INCREMENT,
+    `nombre` varchar(50) CHARACTER SET utf8mb4 NOT NULL,
+    `valorunit` double NOT NULL,
+    CONSTRAINT `PK_insumo` PRIMARY KEY (`Id`),
+    CONSTRAINT `AK_insumo_nombre` UNIQUE (`nombre`)
+) CHARACTER SET=utf8mb4;
+[2023-10-20 19:09:51.202 -05:00 INF] Executed DbCommand (21ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `pais` (
+    `Id` int NOT NULL AUTO_INCREMENT,
+    `nombre` varchar(50) CHARACTER SET utf8mb4 NOT NULL,
+    CONSTRAINT `PK_pais` PRIMARY KEY (`Id`)
+) CHARACTER SET=utf8mb4;
+[2023-10-20 19:09:51.223 -05:00 INF] Executed DbCommand (21ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `rol` (
+    `Id` int NOT NULL AUTO_INCREMENT,
+    `rolName` varchar(50) CHARACTER SET utf8mb4 NOT NULL,
+    CONSTRAINT `PK_rol` PRIMARY KEY (`Id`)
+) CHARACTER SET=utf8mb4;
+[2023-10-20 19:09:51.251 -05:00 INF] Executed DbCommand (27ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `talla` (
+    `Id` int NOT NULL AUTO_INCREMENT,
+    `descripcion` varchar(50) CHARACTER SET utf8mb4 NOT NULL,
+    CONSTRAINT `PK_talla` PRIMARY KEY (`Id`),
+    CONSTRAINT `AK_talla_descripcion` UNIQUE (`descripcion`)
+) CHARACTER SET=utf8mb4;
+[2023-10-20 19:09:51.289 -05:00 INF] Executed DbCommand (24ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `tipoestado` (
+    `Id` int NOT NULL AUTO_INCREMENT,
+    `descripcion` varchar(50) CHARACTER SET utf8mb4 NOT NULL,
+    CONSTRAINT `PK_tipoestado` PRIMARY KEY (`Id`)
+) CHARACTER SET=utf8mb4;
+[2023-10-20 19:09:51.309 -05:00 INF] Executed DbCommand (20ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `tipopersona` (
+    `Id` int NOT NULL AUTO_INCREMENT,
+    `nombre` varchar(50) CHARACTER SET utf8mb4 NOT NULL,
+    CONSTRAINT `PK_tipopersona` PRIMARY KEY (`Id`)
+) CHARACTER SET=utf8mb4;
+[2023-10-20 19:09:51.332 -05:00 INF] Executed DbCommand (23ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `tipoproteccion` (
+    `Id` int NOT NULL AUTO_INCREMENT,
+    `descripcion` varchar(50) CHARACTER SET utf8mb4 NOT NULL,
+    CONSTRAINT `PK_tipoproteccion` PRIMARY KEY (`Id`)
+) CHARACTER SET=utf8mb4;
+[2023-10-20 19:09:51.357 -05:00 INF] Executed DbCommand (25ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `user` (
+    `Id` int NOT NULL AUTO_INCREMENT,
+    `username` varchar(50) CHARACTER SET utf8mb4 NULL,
+    `email` varchar(100) CHARACTER SET utf8mb4 NOT NULL,
+    `password` varchar(255) CHARACTER SET utf8mb4 NOT NULL,
+    CONSTRAINT `PK_user` PRIMARY KEY (`Id`)
+) CHARACTER SET=utf8mb4;
+[2023-10-20 19:09:51.394 -05:00 INF] Executed DbCommand (37ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `departamento` (
+    `Id` int NOT NULL AUTO_INCREMENT,
+    `nombre` varchar(50) CHARACTER SET utf8mb4 NOT NULL,
+    `PaisFk` int NOT NULL,
+    CONSTRAINT `PK_departamento` PRIMARY KEY (`Id`),
+    CONSTRAINT `FK_departamento_pais_PaisFk` FOREIGN KEY (`PaisFk`) REFERENCES `pais` (`Id`) ON DELETE CASCADE
+) CHARACTER SET=utf8mb4;
+[2023-10-20 19:09:51.423 -05:00 INF] Executed DbCommand (28ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `estado` (
+    `Id` int NOT NULL AUTO_INCREMENT,
+    `descripcion` varchar(50) CHARACTER SET utf8mb4 NOT NULL,
+    `TipoEstadoIdFk` int NOT NULL,
+    CONSTRAINT `PK_estado` PRIMARY KEY (`Id`),
+    CONSTRAINT `FK_estado_tipoestado_TipoEstadoIdFk` FOREIGN KEY (`TipoEstadoIdFk`) REFERENCES `tipoestado` (`Id`) ON DELETE CASCADE
+) CHARACTER SET=utf8mb4;
+[2023-10-20 19:09:51.455 -05:00 INF] Executed DbCommand (31ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `RefreshToken` (
+    `Id` int NOT NULL AUTO_INCREMENT,
+    `UserId` int NOT NULL,
+    `Token` longtext CHARACTER SET utf8mb4 NULL,
+    `Expires` datetime(6) NOT NULL,
+    `Created` datetime(6) NOT NULL,
+    `Revoked` datetime(6) NULL,
+    CONSTRAINT `PK_RefreshToken` PRIMARY KEY (`Id`),
+    CONSTRAINT `FK_RefreshToken_user_UserId` FOREIGN KEY (`UserId`) REFERENCES `user` (`Id`) ON DELETE CASCADE
+) CHARACTER SET=utf8mb4;
+[2023-10-20 19:09:51.489 -05:00 INF] Executed DbCommand (33ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `userRol` (
+    `UserId` int NOT NULL,
+    `RolId` int NOT NULL,
+    CONSTRAINT `PK_userRol` PRIMARY KEY (`UserId`, `RolId`),
+    CONSTRAINT `FK_userRol_rol_RolId` FOREIGN KEY (`RolId`) REFERENCES `rol` (`Id`) ON DELETE CASCADE,
+    CONSTRAINT `FK_userRol_user_UserId` FOREIGN KEY (`UserId`) REFERENCES `user` (`Id`) ON DELETE CASCADE
+) CHARACTER SET=utf8mb4;
+[2023-10-20 19:09:51.520 -05:00 INF] Executed DbCommand (31ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `municipio` (
+    `Id` int NOT NULL AUTO_INCREMENT,
+    `nombre` varchar(50) CHARACTER SET utf8mb4 NOT NULL,
+    `DepartamentoIdFk` int NOT NULL,
+    CONSTRAINT `PK_municipio` PRIMARY KEY (`Id`),
+    CONSTRAINT `FK_municipio_departamento_DepartamentoIdFk` FOREIGN KEY (`DepartamentoIdFk`) REFERENCES `departamento` (`Id`) ON DELETE CASCADE
+) CHARACTER SET=utf8mb4;
+[2023-10-20 19:09:51.568 -05:00 INF] Executed DbCommand (48ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `prenda` (
+    `Id` int NOT NULL AUTO_INCREMENT,
+    `prenda` varchar(50) CHARACTER SET utf8mb4 NOT NULL,
+    `nombre` varchar(50) CHARACTER SET utf8mb4 NOT NULL,
+    `valorunitcop` double NOT NULL,
+    `valorunitusd` double NOT NULL,
+    `TipoProteccionIdFk` int NOT NULL,
+    `GeneroIdFk` int NOT NULL,
+    `EstadoIdFk` int NOT NULL,
+    CONSTRAINT `PK_prenda` PRIMARY KEY (`Id`),
+    CONSTRAINT `AK_prenda_prenda` UNIQUE (`prenda`),
+    CONSTRAINT `FK_prenda_estado_EstadoIdFk` FOREIGN KEY (`EstadoIdFk`) REFERENCES `estado` (`Id`) ON DELETE CASCADE,
+    CONSTRAINT `FK_prenda_genero_GeneroIdFk` FOREIGN KEY (`GeneroIdFk`) REFERENCES `genero` (`Id`) ON DELETE CASCADE,
+    CONSTRAINT `FK_prenda_tipoproteccion_TipoProteccionIdFk` FOREIGN KEY (`TipoProteccionIdFk`) REFERENCES `tipoproteccion` (`Id`) ON DELETE CASCADE
+) CHARACTER SET=utf8mb4;
+[2023-10-20 19:09:51.615 -05:00 INF] Executed DbCommand (46ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `cliente` (
+    `Id` int NOT NULL AUTO_INCREMENT,
+    `id_cliente` varchar(50) CHARACTER SET utf8mb4 NOT NULL,
+    `nombre` varchar(50) CHARACTER SET utf8mb4 NOT NULL,
+    `fecharegistro` datetime NOT NULL,
+    `MunicipioIdFk` int NOT NULL,
+    `TipoPersonaIdFk` int NOT NULL,
+    CONSTRAINT `PK_cliente` PRIMARY KEY (`Id`),
+    CONSTRAINT `AK_cliente_id_cliente` UNIQUE (`id_cliente`),
+    CONSTRAINT `FK_cliente_municipio_MunicipioIdFk` FOREIGN KEY (`MunicipioIdFk`) REFERENCES `municipio` (`Id`) ON DELETE CASCADE,
+    CONSTRAINT `FK_cliente_tipopersona_TipoPersonaIdFk` FOREIGN KEY (`TipoPersonaIdFk`) REFERENCES `tipopersona` (`Id`) ON DELETE CASCADE
+) CHARACTER SET=utf8mb4;
+[2023-10-20 19:09:51.661 -05:00 INF] Executed DbCommand (46ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `empleado` (
+    `Id` int NOT NULL AUTO_INCREMENT,
+    `idempleado` varchar(50) CHARACTER SET utf8mb4 NOT NULL,
+    `nombre` varchar(50) CHARACTER SET utf8mb4 NOT NULL,
+    `fechaingreso` datetime NOT NULL,
+    `CargoIdFk` int NOT NULL,
+    `MunicipioIdFk` int NOT NULL,
+    CONSTRAINT `PK_empleado` PRIMARY KEY (`Id`),
+    CONSTRAINT `AK_empleado_idempleado` UNIQUE (`idempleado`),
+    CONSTRAINT `FK_empleado_cargo_CargoIdFk` FOREIGN KEY (`CargoIdFk`) REFERENCES `cargo` (`Id`) ON DELETE CASCADE,
+    CONSTRAINT `FK_empleado_municipio_MunicipioIdFk` FOREIGN KEY (`MunicipioIdFk`) REFERENCES `municipio` (`Id`) ON DELETE CASCADE
+) CHARACTER SET=utf8mb4;
+[2023-10-20 19:09:51.696 -05:00 INF] Executed DbCommand (34ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `empresa` (
+    `Id` int NOT NULL AUTO_INCREMENT,
+    `nit` varchar(100) CHARACTER SET utf8mb4 NOT NULL,
+    `razonsocial` varchar(100) CHARACTER SET utf8mb4 NOT NULL,
+    `representantelegal` varchar(100) CHARACTER SET utf8mb4 NOT NULL,
+    `fechacreacion` datetime NOT NULL,
+    `MunicipioIdFk` int NOT NULL,
+    CONSTRAINT `PK_empresa` PRIMARY KEY (`Id`),
+    CONSTRAINT `AK_empresa_nit` UNIQUE (`nit`),
+    CONSTRAINT `FK_empresa_municipio_MunicipioIdFk` FOREIGN KEY (`MunicipioIdFk`) REFERENCES `municipio` (`Id`) ON DELETE CASCADE
+) CHARACTER SET=utf8mb4;
+[2023-10-20 19:09:51.740 -05:00 INF] Executed DbCommand (43ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `proveedor` (
+    `Id` int NOT NULL AUTO_INCREMENT,
+    `nitproveedor` varchar(50) CHARACTER SET utf8mb4 NOT NULL,
+    `nombre` varchar(50) CHARACTER SET utf8mb4 NOT NULL,
+    `MunicipioIdFk` int NOT NULL,
+    `TipoPersonaIdFk` int NOT NULL,
+    CONSTRAINT `PK_proveedor` PRIMARY KEY (`Id`),
+    CONSTRAINT `AK_proveedor_nitproveedor` UNIQUE (`nitproveedor`),
+    CONSTRAINT `FK_proveedor_municipio_MunicipioIdFk` FOREIGN KEY (`MunicipioIdFk`) REFERENCES `municipio` (`Id`) ON DELETE CASCADE,
+    CONSTRAINT `FK_proveedor_tipopersona_TipoPersonaIdFk` FOREIGN KEY (`TipoPersonaIdFk`) REFERENCES `tipopersona` (`Id`) ON DELETE CASCADE
+) CHARACTER SET=utf8mb4;
+[2023-10-20 19:09:51.782 -05:00 INF] Executed DbCommand (42ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `insumoprenda` (
+    `PrendaIdFk` int NOT NULL,
+    `InsumoIdFk` int NOT NULL,
+    `cantidad` int NOT NULL,
+    `PrendaId` int NULL,
+    `InsumoId` int NULL,
+    CONSTRAINT `PK_insumoprenda` PRIMARY KEY (`PrendaIdFk`, `InsumoIdFk`),
+    CONSTRAINT `FK_insumoprenda_insumo_InsumoId` FOREIGN KEY (`InsumoId`) REFERENCES `insumo` (`Id`),
+    CONSTRAINT `FK_insumoprenda_prenda_PrendaId` FOREIGN KEY (`PrendaId`) REFERENCES `prenda` (`Id`)
+) CHARACTER SET=utf8mb4;
+[2023-10-20 19:09:51.820 -05:00 INF] Executed DbCommand (38ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `inventario` (
+    `Id` int NOT NULL AUTO_INCREMENT,
+    `codinv` varchar(50) CHARACTER SET utf8mb4 NOT NULL,
+    `valorventacop` double NOT NULL,
+    `valorventausd` double NOT NULL,
+    `PrendaIdFk` int NOT NULL,
+    CONSTRAINT `PK_inventario` PRIMARY KEY (`Id`),
+    CONSTRAINT `AK_inventario_codinv` UNIQUE (`codinv`),
+    CONSTRAINT `FK_inventario_prenda_PrendaIdFk` FOREIGN KEY (`PrendaIdFk`) REFERENCES `prenda` (`Id`) ON DELETE CASCADE
+) CHARACTER SET=utf8mb4;
+[2023-10-20 19:09:51.869 -05:00 INF] Executed DbCommand (48ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `orden` (
+    `Id` int NOT NULL AUTO_INCREMENT,
+    `fecha` datetime NOT NULL,
+    `EmpleadoIdFk` int NOT NULL,
+    `ClienteIdFk` int NOT NULL,
+    `EstadoIdFk` int NOT NULL,
+    CONSTRAINT `PK_orden` PRIMARY KEY (`Id`),
+    CONSTRAINT `FK_orden_cliente_ClienteIdFk` FOREIGN KEY (`ClienteIdFk`) REFERENCES `cliente` (`Id`) ON DELETE CASCADE,
+    CONSTRAINT `FK_orden_empleado_EmpleadoIdFk` FOREIGN KEY (`EmpleadoIdFk`) REFERENCES `empleado` (`Id`) ON DELETE CASCADE,
+    CONSTRAINT `FK_orden_estado_EstadoIdFk` FOREIGN KEY (`EstadoIdFk`) REFERENCES `estado` (`Id`) ON DELETE CASCADE
+) CHARACTER SET=utf8mb4;
+[2023-10-20 19:09:51.925 -05:00 INF] Executed DbCommand (56ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `venta` (
+    `Id` int NOT NULL AUTO_INCREMENT,
+    `fecha` datetime NOT NULL,
+    `EmpleadoIdFk` int NOT NULL,
+    `ClienteIdFk` int NOT NULL,
+    `FormaPagoIdFk` int NOT NULL,
+    CONSTRAINT `PK_venta` PRIMARY KEY (`Id`),
+    CONSTRAINT `FK_venta_cliente_ClienteIdFk` FOREIGN KEY (`ClienteIdFk`) REFERENCES `cliente` (`Id`) ON DELETE CASCADE,
+    CONSTRAINT `FK_venta_empleado_EmpleadoIdFk` FOREIGN KEY (`EmpleadoIdFk`) REFERENCES `empleado` (`Id`) ON DELETE CASCADE,
+    CONSTRAINT `FK_venta_formapago_FormaPagoIdFk` FOREIGN KEY (`FormaPagoIdFk`) REFERENCES `formapago` (`Id`) ON DELETE CASCADE
+) CHARACTER SET=utf8mb4;
+[2023-10-20 19:09:51.965 -05:00 INF] Executed DbCommand (39ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `insumoproveedor` (
+    `InsumoIdFk` int NOT NULL,
+    `ProveedorIdFk` int NOT NULL,
+    `cantidad` int NOT NULL,
+    `InsumoId` int NULL,
+    `ProvedorId` int NULL,
+    `Id` int NOT NULL,
+    CONSTRAINT `PK_insumoproveedor` PRIMARY KEY (`InsumoIdFk`, `ProveedorIdFk`),
+    CONSTRAINT `FK_insumoproveedor_insumo_InsumoId` FOREIGN KEY (`InsumoId`) REFERENCES `insumo` (`Id`),
+    CONSTRAINT `FK_insumoproveedor_proveedor_ProvedorId` FOREIGN KEY (`ProvedorId`) REFERENCES `proveedor` (`Id`)
+) CHARACTER SET=utf8mb4;
+[2023-10-20 19:09:52.008 -05:00 INF] Executed DbCommand (43ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `inventariotalla` (
+    `InventarioIdFk` int NOT NULL,
+    `TallaIdFk` int NOT NULL,
+    `cantidad` int NOT NULL,
+    `InventarioId` int NULL,
+    `TallaId` int NULL,
+    CONSTRAINT `PK_inventariotalla` PRIMARY KEY (`InventarioIdFk`, `TallaIdFk`),
+    CONSTRAINT `FK_inventariotalla_inventario_InventarioId` FOREIGN KEY (`InventarioId`) REFERENCES `inventario` (`Id`),
+    CONSTRAINT `FK_inventariotalla_talla_TallaId` FOREIGN KEY (`TallaId`) REFERENCES `talla` (`Id`)
+) CHARACTER SET=utf8mb4;
+[2023-10-20 19:09:52.062 -05:00 INF] Executed DbCommand (53ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `detalleorden` (
+    `Id` int NOT NULL AUTO_INCREMENT,
+    `cantidadproducir` int NOT NULL,
+    `cantidadproducida` int NOT NULL,
+    `OrdenIdFk` int NOT NULL,
+    `PrendaIdFk` int NOT NULL,
+    `ColorIdFk` int NOT NULL,
+    `EstadoIdFk` int NOT NULL,
+    CONSTRAINT `PK_detalleorden` PRIMARY KEY (`Id`),
+    CONSTRAINT `FK_detalleorden_color_ColorIdFk` FOREIGN KEY (`ColorIdFk`) REFERENCES `color` (`Id`) ON DELETE CASCADE,
+    CONSTRAINT `FK_detalleorden_estado_EstadoIdFk` FOREIGN KEY (`EstadoIdFk`) REFERENCES `estado` (`Id`) ON DELETE CASCADE,
+    CONSTRAINT `FK_detalleorden_orden_OrdenIdFk` FOREIGN KEY (`OrdenIdFk`) REFERENCES `orden` (`Id`) ON DELETE CASCADE,
+    CONSTRAINT `FK_detalleorden_prenda_PrendaIdFk` FOREIGN KEY (`PrendaIdFk`) REFERENCES `prenda` (`Id`) ON DELETE CASCADE
+) CHARACTER SET=utf8mb4;
+[2023-10-20 19:09:52.125 -05:00 INF] Executed DbCommand (63ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `detalleventa` (
+    `Id` int NOT NULL AUTO_INCREMENT,
+    `cantidad` int NOT NULL,
+    `valorunitario` double NOT NULL,
+    `VentaIdFk` int NOT NULL,
+    `InventarioIdFk` int NOT NULL,
+    `TallaIdFk` int NOT NULL,
+    CONSTRAINT `PK_detalleventa` PRIMARY KEY (`Id`),
+    CONSTRAINT `FK_detalleventa_inventario_InventarioIdFk` FOREIGN KEY (`InventarioIdFk`) REFERENCES `inventario` (`Id`) ON DELETE CASCADE,
+    CONSTRAINT `FK_detalleventa_talla_TallaIdFk` FOREIGN KEY (`TallaIdFk`) REFERENCES `talla` (`Id`) ON DELETE CASCADE,
+    CONSTRAINT `FK_detalleventa_venta_VentaIdFk` FOREIGN KEY (`VentaIdFk`) REFERENCES `venta` (`Id`) ON DELETE CASCADE
+) CHARACTER SET=utf8mb4;
+[2023-10-20 19:09:52.166 -05:00 INF] Executed DbCommand (41ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_cliente_MunicipioIdFk` ON `cliente` (`MunicipioIdFk`);
+[2023-10-20 19:09:52.198 -05:00 INF] Executed DbCommand (32ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_cliente_TipoPersonaIdFk` ON `cliente` (`TipoPersonaIdFk`);
+[2023-10-20 19:09:52.225 -05:00 INF] Executed DbCommand (26ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_departamento_PaisFk` ON `departamento` (`PaisFk`);
+[2023-10-20 19:09:52.252 -05:00 INF] Executed DbCommand (26ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_detalleorden_ColorIdFk` ON `detalleorden` (`ColorIdFk`);
+[2023-10-20 19:09:52.272 -05:00 INF] Executed DbCommand (20ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_detalleorden_EstadoIdFk` ON `detalleorden` (`EstadoIdFk`);
+[2023-10-20 19:09:52.291 -05:00 INF] Executed DbCommand (18ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_detalleorden_OrdenIdFk` ON `detalleorden` (`OrdenIdFk`);
+[2023-10-20 19:09:52.308 -05:00 INF] Executed DbCommand (17ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_detalleorden_PrendaIdFk` ON `detalleorden` (`PrendaIdFk`);
+[2023-10-20 19:09:52.334 -05:00 INF] Executed DbCommand (25ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_detalleventa_InventarioIdFk` ON `detalleventa` (`InventarioIdFk`);
+[2023-10-20 19:09:52.355 -05:00 INF] Executed DbCommand (19ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_detalleventa_TallaIdFk` ON `detalleventa` (`TallaIdFk`);
+[2023-10-20 19:09:52.373 -05:00 INF] Executed DbCommand (18ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_detalleventa_VentaIdFk` ON `detalleventa` (`VentaIdFk`);
+[2023-10-20 19:09:52.411 -05:00 INF] Executed DbCommand (38ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_empleado_CargoIdFk` ON `empleado` (`CargoIdFk`);
+[2023-10-20 19:09:52.439 -05:00 INF] Executed DbCommand (28ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_empleado_MunicipioIdFk` ON `empleado` (`MunicipioIdFk`);
+[2023-10-20 19:09:52.464 -05:00 INF] Executed DbCommand (24ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_empresa_MunicipioIdFk` ON `empresa` (`MunicipioIdFk`);
+[2023-10-20 19:09:52.497 -05:00 INF] Executed DbCommand (33ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_estado_TipoEstadoIdFk` ON `estado` (`TipoEstadoIdFk`);
+[2023-10-20 19:09:52.517 -05:00 INF] Executed DbCommand (21ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_insumoprenda_InsumoId` ON `insumoprenda` (`InsumoId`);
+[2023-10-20 19:09:52.534 -05:00 INF] Executed DbCommand (16ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_insumoprenda_PrendaId` ON `insumoprenda` (`PrendaId`);
+[2023-10-20 19:09:52.554 -05:00 INF] Executed DbCommand (20ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_insumoproveedor_InsumoId` ON `insumoproveedor` (`InsumoId`);
+[2023-10-20 19:09:52.573 -05:00 INF] Executed DbCommand (18ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_insumoproveedor_ProvedorId` ON `insumoproveedor` (`ProvedorId`);
+[2023-10-20 19:09:52.607 -05:00 INF] Executed DbCommand (34ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_inventario_PrendaIdFk` ON `inventario` (`PrendaIdFk`);
+[2023-10-20 19:09:52.628 -05:00 INF] Executed DbCommand (21ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_inventariotalla_InventarioId` ON `inventariotalla` (`InventarioId`);
+[2023-10-20 19:09:52.646 -05:00 INF] Executed DbCommand (17ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_inventariotalla_TallaId` ON `inventariotalla` (`TallaId`);
+[2023-10-20 19:09:52.679 -05:00 INF] Executed DbCommand (33ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_municipio_DepartamentoIdFk` ON `municipio` (`DepartamentoIdFk`);
+[2023-10-20 19:09:52.708 -05:00 INF] Executed DbCommand (29ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_orden_ClienteIdFk` ON `orden` (`ClienteIdFk`);
+[2023-10-20 19:09:52.731 -05:00 INF] Executed DbCommand (23ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_orden_EmpleadoIdFk` ON `orden` (`EmpleadoIdFk`);
+[2023-10-20 19:09:52.756 -05:00 INF] Executed DbCommand (24ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_orden_EstadoIdFk` ON `orden` (`EstadoIdFk`);
+[2023-10-20 19:09:52.793 -05:00 INF] Executed DbCommand (37ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_prenda_EstadoIdFk` ON `prenda` (`EstadoIdFk`);
+[2023-10-20 19:09:52.825 -05:00 INF] Executed DbCommand (32ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_prenda_GeneroIdFk` ON `prenda` (`GeneroIdFk`);
+[2023-10-20 19:09:52.857 -05:00 INF] Executed DbCommand (31ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_prenda_TipoProteccionIdFk` ON `prenda` (`TipoProteccionIdFk`);
+[2023-10-20 19:09:52.883 -05:00 INF] Executed DbCommand (26ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_proveedor_MunicipioIdFk` ON `proveedor` (`MunicipioIdFk`);
+[2023-10-20 19:09:52.906 -05:00 INF] Executed DbCommand (23ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_proveedor_TipoPersonaIdFk` ON `proveedor` (`TipoPersonaIdFk`);
+[2023-10-20 19:09:52.929 -05:00 INF] Executed DbCommand (22ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_RefreshToken_UserId` ON `RefreshToken` (`UserId`);
+[2023-10-20 19:09:52.955 -05:00 INF] Executed DbCommand (26ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_userRol_RolId` ON `userRol` (`RolId`);
+[2023-10-20 19:09:52.981 -05:00 INF] Executed DbCommand (26ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_venta_ClienteIdFk` ON `venta` (`ClienteIdFk`);
+[2023-10-20 19:09:53.002 -05:00 INF] Executed DbCommand (21ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_venta_EmpleadoIdFk` ON `venta` (`EmpleadoIdFk`);
+[2023-10-20 19:09:53.022 -05:00 INF] Executed DbCommand (20ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_venta_FormaPagoIdFk` ON `venta` (`FormaPagoIdFk`);
+[2023-10-20 19:09:53.027 -05:00 INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO `__EFMigrationsHistory` (`MigrationId`, `ProductVersion`)
+VALUES ('20231021000822_initialmigration', '7.0.10');
+[2023-10-20 19:35:51.631 -05:00 INF] Executed DbCommand (8ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE DATABASE `DiegoRopa`;
+[2023-10-20 19:35:51.807 -05:00 INF] Executed DbCommand (26ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `__EFMigrationsHistory` (
+    `MigrationId` varchar(150) CHARACTER SET utf8mb4 NOT NULL,
+    `ProductVersion` varchar(32) CHARACTER SET utf8mb4 NOT NULL,
+    CONSTRAINT `PK___EFMigrationsHistory` PRIMARY KEY (`MigrationId`)
+) CHARACTER SET=utf8mb4;
+[2023-10-20 19:35:51.832 -05:00 INF] Executed DbCommand (9ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='DiegoRopa' AND TABLE_NAME='__EFMigrationsHistory';
+[2023-10-20 19:35:51.842 -05:00 INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `MigrationId`, `ProductVersion`
+FROM `__EFMigrationsHistory`
+ORDER BY `MigrationId`;
+[2023-10-20 19:35:51.866 -05:00 INF] Applying migration '20231021003529_initialmigration'.
+[2023-10-20 19:35:52.004 -05:00 INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER DATABASE CHARACTER SET utf8mb4;
+[2023-10-20 19:35:52.052 -05:00 INF] Executed DbCommand (48ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `cargo` (
+    `Id` int NOT NULL AUTO_INCREMENT,
+    `descripcion` varchar(50) CHARACTER SET utf8mb4 NOT NULL,
+    `sueldobase` double NOT NULL,
+    CONSTRAINT `PK_cargo` PRIMARY KEY (`Id`)
+) CHARACTER SET=utf8mb4;
+[2023-10-20 19:35:52.074 -05:00 INF] Executed DbCommand (21ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `color` (
+    `Id` int NOT NULL AUTO_INCREMENT,
+    `descripcion` varchar(50) CHARACTER SET utf8mb4 NOT NULL,
+    CONSTRAINT `PK_color` PRIMARY KEY (`Id`)
+) CHARACTER SET=utf8mb4;
+[2023-10-20 19:35:52.097 -05:00 INF] Executed DbCommand (23ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `formapago` (
+    `Id` int NOT NULL AUTO_INCREMENT,
+    `descripcion` varchar(50) CHARACTER SET utf8mb4 NOT NULL,
+    CONSTRAINT `PK_formapago` PRIMARY KEY (`Id`)
+) CHARACTER SET=utf8mb4;
+[2023-10-20 19:35:52.118 -05:00 INF] Executed DbCommand (21ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `genero` (
+    `Id` int NOT NULL AUTO_INCREMENT,
+    `descripcion` varchar(50) CHARACTER SET utf8mb4 NOT NULL,
+    CONSTRAINT `PK_genero` PRIMARY KEY (`Id`)
+) CHARACTER SET=utf8mb4;
+[2023-10-20 19:35:52.155 -05:00 INF] Executed DbCommand (28ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `insumo` (
+    `Id` int NOT NULL AUTO_INCREMENT,
+    `nombre` varchar(50) CHARACTER SET utf8mb4 NOT NULL,
+    `valorunit` double NOT NULL,
+    CONSTRAINT `PK_insumo` PRIMARY KEY (`Id`),
+    CONSTRAINT `AK_insumo_nombre` UNIQUE (`nombre`)
+) CHARACTER SET=utf8mb4;
+[2023-10-20 19:35:52.177 -05:00 INF] Executed DbCommand (21ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `pais` (
+    `Id` int NOT NULL AUTO_INCREMENT,
+    `nombre` varchar(50) CHARACTER SET utf8mb4 NOT NULL,
+    CONSTRAINT `PK_pais` PRIMARY KEY (`Id`)
+) CHARACTER SET=utf8mb4;
+[2023-10-20 19:35:52.200 -05:00 INF] Executed DbCommand (23ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `rol` (
+    `Id` int NOT NULL AUTO_INCREMENT,
+    `rolName` varchar(50) CHARACTER SET utf8mb4 NOT NULL,
+    CONSTRAINT `PK_rol` PRIMARY KEY (`Id`)
+) CHARACTER SET=utf8mb4;
+[2023-10-20 19:35:52.230 -05:00 INF] Executed DbCommand (29ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `talla` (
+    `Id` int NOT NULL AUTO_INCREMENT,
+    `descripcion` varchar(50) CHARACTER SET utf8mb4 NOT NULL,
+    CONSTRAINT `PK_talla` PRIMARY KEY (`Id`),
+    CONSTRAINT `AK_talla_descripcion` UNIQUE (`descripcion`)
+) CHARACTER SET=utf8mb4;
+[2023-10-20 19:35:52.250 -05:00 INF] Executed DbCommand (20ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `tipoestado` (
+    `Id` int NOT NULL AUTO_INCREMENT,
+    `descripcion` varchar(50) CHARACTER SET utf8mb4 NOT NULL,
+    CONSTRAINT `PK_tipoestado` PRIMARY KEY (`Id`)
+) CHARACTER SET=utf8mb4;
+[2023-10-20 19:35:52.271 -05:00 INF] Executed DbCommand (21ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `tipopersona` (
+    `Id` int NOT NULL AUTO_INCREMENT,
+    `nombre` varchar(50) CHARACTER SET utf8mb4 NOT NULL,
+    CONSTRAINT `PK_tipopersona` PRIMARY KEY (`Id`)
+) CHARACTER SET=utf8mb4;
+[2023-10-20 19:35:52.295 -05:00 INF] Executed DbCommand (23ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `tipoproteccion` (
+    `Id` int NOT NULL AUTO_INCREMENT,
+    `descripcion` varchar(50) CHARACTER SET utf8mb4 NOT NULL,
+    CONSTRAINT `PK_tipoproteccion` PRIMARY KEY (`Id`)
+) CHARACTER SET=utf8mb4;
+[2023-10-20 19:35:52.316 -05:00 INF] Executed DbCommand (20ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `user` (
+    `Id` int NOT NULL AUTO_INCREMENT,
+    `username` varchar(50) CHARACTER SET utf8mb4 NULL,
+    `email` varchar(100) CHARACTER SET utf8mb4 NOT NULL,
+    `password` varchar(255) CHARACTER SET utf8mb4 NOT NULL,
+    CONSTRAINT `PK_user` PRIMARY KEY (`Id`)
+) CHARACTER SET=utf8mb4;
+[2023-10-20 19:35:52.349 -05:00 INF] Executed DbCommand (33ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `departamento` (
+    `Id` int NOT NULL AUTO_INCREMENT,
+    `nombre` varchar(50) CHARACTER SET utf8mb4 NOT NULL,
+    `PaisFk` int NOT NULL,
+    CONSTRAINT `PK_departamento` PRIMARY KEY (`Id`),
+    CONSTRAINT `FK_departamento_pais_PaisFk` FOREIGN KEY (`PaisFk`) REFERENCES `pais` (`Id`) ON DELETE CASCADE
+) CHARACTER SET=utf8mb4;
+[2023-10-20 19:35:52.377 -05:00 INF] Executed DbCommand (28ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `estado` (
+    `Id` int NOT NULL AUTO_INCREMENT,
+    `descripcion` varchar(50) CHARACTER SET utf8mb4 NOT NULL,
+    `TipoEstadoIdFk` int NOT NULL,
+    CONSTRAINT `PK_estado` PRIMARY KEY (`Id`),
+    CONSTRAINT `FK_estado_tipoestado_TipoEstadoIdFk` FOREIGN KEY (`TipoEstadoIdFk`) REFERENCES `tipoestado` (`Id`) ON DELETE CASCADE
+) CHARACTER SET=utf8mb4;
+[2023-10-20 19:35:52.407 -05:00 INF] Executed DbCommand (29ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `RefreshToken` (
+    `Id` int NOT NULL AUTO_INCREMENT,
+    `UserId` int NOT NULL,
+    `Token` longtext CHARACTER SET utf8mb4 NULL,
+    `Expires` datetime(6) NOT NULL,
+    `Created` datetime(6) NOT NULL,
+    `Revoked` datetime(6) NULL,
+    CONSTRAINT `PK_RefreshToken` PRIMARY KEY (`Id`),
+    CONSTRAINT `FK_RefreshToken_user_UserId` FOREIGN KEY (`UserId`) REFERENCES `user` (`Id`) ON DELETE CASCADE
+) CHARACTER SET=utf8mb4;
+[2023-10-20 19:35:52.441 -05:00 INF] Executed DbCommand (34ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `userRol` (
+    `UserId` int NOT NULL,
+    `RolId` int NOT NULL,
+    CONSTRAINT `PK_userRol` PRIMARY KEY (`UserId`, `RolId`),
+    CONSTRAINT `FK_userRol_rol_RolId` FOREIGN KEY (`RolId`) REFERENCES `rol` (`Id`) ON DELETE CASCADE,
+    CONSTRAINT `FK_userRol_user_UserId` FOREIGN KEY (`UserId`) REFERENCES `user` (`Id`) ON DELETE CASCADE
+) CHARACTER SET=utf8mb4;
+[2023-10-20 19:35:52.472 -05:00 INF] Executed DbCommand (31ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `municipio` (
+    `Id` int NOT NULL AUTO_INCREMENT,
+    `nombre` varchar(50) CHARACTER SET utf8mb4 NOT NULL,
+    `DepartamentoIdFk` int NOT NULL,
+    CONSTRAINT `PK_municipio` PRIMARY KEY (`Id`),
+    CONSTRAINT `FK_municipio_departamento_DepartamentoIdFk` FOREIGN KEY (`DepartamentoIdFk`) REFERENCES `departamento` (`Id`) ON DELETE CASCADE
+) CHARACTER SET=utf8mb4;
+[2023-10-20 19:35:52.526 -05:00 INF] Executed DbCommand (53ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `prenda` (
+    `Id` int NOT NULL AUTO_INCREMENT,
+    `prenda` varchar(50) CHARACTER SET utf8mb4 NOT NULL,
+    `nombre` varchar(50) CHARACTER SET utf8mb4 NOT NULL,
+    `valorunitcop` double NOT NULL,
+    `valorunitusd` double NOT NULL,
+    `TipoProteccionIdFk` int NOT NULL,
+    `GeneroIdFk` int NOT NULL,
+    `EstadoIdFk` int NOT NULL,
+    CONSTRAINT `PK_prenda` PRIMARY KEY (`Id`),
+    CONSTRAINT `AK_prenda_prenda` UNIQUE (`prenda`),
+    CONSTRAINT `FK_prenda_estado_EstadoIdFk` FOREIGN KEY (`EstadoIdFk`) REFERENCES `estado` (`Id`) ON DELETE CASCADE,
+    CONSTRAINT `FK_prenda_genero_GeneroIdFk` FOREIGN KEY (`GeneroIdFk`) REFERENCES `genero` (`Id`) ON DELETE CASCADE,
+    CONSTRAINT `FK_prenda_tipoproteccion_TipoProteccionIdFk` FOREIGN KEY (`TipoProteccionIdFk`) REFERENCES `tipoproteccion` (`Id`) ON DELETE CASCADE
+) CHARACTER SET=utf8mb4;
+[2023-10-20 19:35:52.576 -05:00 INF] Executed DbCommand (50ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `cliente` (
+    `Id` int NOT NULL AUTO_INCREMENT,
+    `id_cliente` varchar(50) CHARACTER SET utf8mb4 NOT NULL,
+    `nombre` varchar(50) CHARACTER SET utf8mb4 NOT NULL,
+    `fecharegistro` datetime NOT NULL,
+    `MunicipioIdFk` int NOT NULL,
+    `TipoPersonaIdFk` int NOT NULL,
+    CONSTRAINT `PK_cliente` PRIMARY KEY (`Id`),
+    CONSTRAINT `AK_cliente_id_cliente` UNIQUE (`id_cliente`),
+    CONSTRAINT `FK_cliente_municipio_MunicipioIdFk` FOREIGN KEY (`MunicipioIdFk`) REFERENCES `municipio` (`Id`) ON DELETE CASCADE,
+    CONSTRAINT `FK_cliente_tipopersona_TipoPersonaIdFk` FOREIGN KEY (`TipoPersonaIdFk`) REFERENCES `tipopersona` (`Id`) ON DELETE CASCADE
+) CHARACTER SET=utf8mb4;
+[2023-10-20 19:35:52.625 -05:00 INF] Executed DbCommand (49ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `empleado` (
+    `Id` int NOT NULL AUTO_INCREMENT,
+    `idempleado` varchar(50) CHARACTER SET utf8mb4 NOT NULL,
+    `nombre` varchar(50) CHARACTER SET utf8mb4 NOT NULL,
+    `fechaingreso` datetime NOT NULL,
+    `CargoIdFk` int NOT NULL,
+    `MunicipioIdFk` int NOT NULL,
+    CONSTRAINT `PK_empleado` PRIMARY KEY (`Id`),
+    CONSTRAINT `AK_empleado_idempleado` UNIQUE (`idempleado`),
+    CONSTRAINT `FK_empleado_cargo_CargoIdFk` FOREIGN KEY (`CargoIdFk`) REFERENCES `cargo` (`Id`) ON DELETE CASCADE,
+    CONSTRAINT `FK_empleado_municipio_MunicipioIdFk` FOREIGN KEY (`MunicipioIdFk`) REFERENCES `municipio` (`Id`) ON DELETE CASCADE
+) CHARACTER SET=utf8mb4;
+[2023-10-20 19:35:52.663 -05:00 INF] Executed DbCommand (37ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `empresa` (
+    `Id` int NOT NULL AUTO_INCREMENT,
+    `nit` varchar(100) CHARACTER SET utf8mb4 NOT NULL,
+    `razonsocial` varchar(100) CHARACTER SET utf8mb4 NOT NULL,
+    `representantelegal` varchar(100) CHARACTER SET utf8mb4 NOT NULL,
+    `fechacreacion` datetime NOT NULL,
+    `MunicipioIdFk` int NOT NULL,
+    CONSTRAINT `PK_empresa` PRIMARY KEY (`Id`),
+    CONSTRAINT `AK_empresa_nit` UNIQUE (`nit`),
+    CONSTRAINT `FK_empresa_municipio_MunicipioIdFk` FOREIGN KEY (`MunicipioIdFk`) REFERENCES `municipio` (`Id`) ON DELETE CASCADE
+) CHARACTER SET=utf8mb4;
+[2023-10-20 19:35:52.706 -05:00 INF] Executed DbCommand (43ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `proveedor` (
+    `Id` int NOT NULL AUTO_INCREMENT,
+    `nitproveedor` varchar(50) CHARACTER SET utf8mb4 NOT NULL,
+    `nombre` varchar(50) CHARACTER SET utf8mb4 NOT NULL,
+    `MunicipioIdFk` int NOT NULL,
+    `TipoPersonaIdFk` int NOT NULL,
+    CONSTRAINT `PK_proveedor` PRIMARY KEY (`Id`),
+    CONSTRAINT `AK_proveedor_nitproveedor` UNIQUE (`nitproveedor`),
+    CONSTRAINT `FK_proveedor_municipio_MunicipioIdFk` FOREIGN KEY (`MunicipioIdFk`) REFERENCES `municipio` (`Id`) ON DELETE CASCADE,
+    CONSTRAINT `FK_proveedor_tipopersona_TipoPersonaIdFk` FOREIGN KEY (`TipoPersonaIdFk`) REFERENCES `tipopersona` (`Id`) ON DELETE CASCADE
+) CHARACTER SET=utf8mb4;
+[2023-10-20 19:35:52.755 -05:00 INF] Executed DbCommand (48ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `insumoprenda` (
+    `PrendaIdFk` int NOT NULL,
+    `InsumoIdFk` int NOT NULL,
+    `cantidad` int NOT NULL,
+    `PrendaId` int NULL,
+    `InsumoId` int NULL,
+    CONSTRAINT `PK_insumoprenda` PRIMARY KEY (`PrendaIdFk`, `InsumoIdFk`),
+    CONSTRAINT `FK_insumoprenda_insumo_InsumoId` FOREIGN KEY (`InsumoId`) REFERENCES `insumo` (`Id`),
+    CONSTRAINT `FK_insumoprenda_prenda_PrendaId` FOREIGN KEY (`PrendaId`) REFERENCES `prenda` (`Id`)
+) CHARACTER SET=utf8mb4;
+[2023-10-20 19:35:52.792 -05:00 INF] Executed DbCommand (37ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `inventario` (
+    `Id` int NOT NULL AUTO_INCREMENT,
+    `codinv` varchar(50) CHARACTER SET utf8mb4 NOT NULL,
+    `valorventacop` double NOT NULL,
+    `valorventausd` double NOT NULL,
+    `PrendaIdFk` int NOT NULL,
+    CONSTRAINT `PK_inventario` PRIMARY KEY (`Id`),
+    CONSTRAINT `AK_inventario_codinv` UNIQUE (`codinv`),
+    CONSTRAINT `FK_inventario_prenda_PrendaIdFk` FOREIGN KEY (`PrendaIdFk`) REFERENCES `prenda` (`Id`) ON DELETE CASCADE
+) CHARACTER SET=utf8mb4;
+[2023-10-20 19:35:52.841 -05:00 INF] Executed DbCommand (49ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `orden` (
+    `Id` int NOT NULL AUTO_INCREMENT,
+    `fecha` datetime NOT NULL,
+    `EmpleadoIdFk` int NOT NULL,
+    `ClienteIdFk` int NOT NULL,
+    `EstadoIdFk` int NOT NULL,
+    CONSTRAINT `PK_orden` PRIMARY KEY (`Id`),
+    CONSTRAINT `FK_orden_cliente_ClienteIdFk` FOREIGN KEY (`ClienteIdFk`) REFERENCES `cliente` (`Id`) ON DELETE CASCADE,
+    CONSTRAINT `FK_orden_empleado_EmpleadoIdFk` FOREIGN KEY (`EmpleadoIdFk`) REFERENCES `empleado` (`Id`) ON DELETE CASCADE,
+    CONSTRAINT `FK_orden_estado_EstadoIdFk` FOREIGN KEY (`EstadoIdFk`) REFERENCES `estado` (`Id`) ON DELETE CASCADE
+) CHARACTER SET=utf8mb4;
+[2023-10-20 19:35:52.887 -05:00 INF] Executed DbCommand (45ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `venta` (
+    `Id` int NOT NULL AUTO_INCREMENT,
+    `fecha` datetime NOT NULL,
+    `EmpleadoIdFk` int NOT NULL,
+    `ClienteIdFk` int NOT NULL,
+    `FormaPagoIdFk` int NOT NULL,
+    CONSTRAINT `PK_venta` PRIMARY KEY (`Id`),
+    CONSTRAINT `FK_venta_cliente_ClienteIdFk` FOREIGN KEY (`ClienteIdFk`) REFERENCES `cliente` (`Id`) ON DELETE CASCADE,
+    CONSTRAINT `FK_venta_empleado_EmpleadoIdFk` FOREIGN KEY (`EmpleadoIdFk`) REFERENCES `empleado` (`Id`) ON DELETE CASCADE,
+    CONSTRAINT `FK_venta_formapago_FormaPagoIdFk` FOREIGN KEY (`FormaPagoIdFk`) REFERENCES `formapago` (`Id`) ON DELETE CASCADE
+) CHARACTER SET=utf8mb4;
+[2023-10-20 19:35:52.928 -05:00 INF] Executed DbCommand (40ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `insumoproveedor` (
+    `InsumoIdFk` int NOT NULL,
+    `ProveedorIdFk` int NOT NULL,
+    `cantidad` int NOT NULL,
+    `InsumoId` int NULL,
+    `ProvedorId` int NULL,
+    CONSTRAINT `PK_insumoproveedor` PRIMARY KEY (`InsumoIdFk`, `ProveedorIdFk`),
+    CONSTRAINT `FK_insumoproveedor_insumo_InsumoId` FOREIGN KEY (`InsumoId`) REFERENCES `insumo` (`Id`),
+    CONSTRAINT `FK_insumoproveedor_proveedor_ProvedorId` FOREIGN KEY (`ProvedorId`) REFERENCES `proveedor` (`Id`)
+) CHARACTER SET=utf8mb4;
+[2023-10-20 19:35:52.963 -05:00 INF] Executed DbCommand (35ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `inventariotalla` (
+    `InventarioIdFk` int NOT NULL,
+    `TallaIdFk` int NOT NULL,
+    `cantidad` int NOT NULL,
+    `InventarioId` int NULL,
+    `TallaId` int NULL,
+    CONSTRAINT `PK_inventariotalla` PRIMARY KEY (`InventarioIdFk`, `TallaIdFk`),
+    CONSTRAINT `FK_inventariotalla_inventario_InventarioId` FOREIGN KEY (`InventarioId`) REFERENCES `inventario` (`Id`),
+    CONSTRAINT `FK_inventariotalla_talla_TallaId` FOREIGN KEY (`TallaId`) REFERENCES `talla` (`Id`)
+) CHARACTER SET=utf8mb4;
+[2023-10-20 19:35:53.016 -05:00 INF] Executed DbCommand (52ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `detalleorden` (
+    `Id` int NOT NULL AUTO_INCREMENT,
+    `cantidadproducir` int NOT NULL,
+    `cantidadproducida` int NOT NULL,
+    `OrdenIdFk` int NOT NULL,
+    `PrendaIdFk` int NOT NULL,
+    `ColorIdFk` int NOT NULL,
+    `EstadoIdFk` int NOT NULL,
+    CONSTRAINT `PK_detalleorden` PRIMARY KEY (`Id`),
+    CONSTRAINT `FK_detalleorden_color_ColorIdFk` FOREIGN KEY (`ColorIdFk`) REFERENCES `color` (`Id`) ON DELETE CASCADE,
+    CONSTRAINT `FK_detalleorden_estado_EstadoIdFk` FOREIGN KEY (`EstadoIdFk`) REFERENCES `estado` (`Id`) ON DELETE CASCADE,
+    CONSTRAINT `FK_detalleorden_orden_OrdenIdFk` FOREIGN KEY (`OrdenIdFk`) REFERENCES `orden` (`Id`) ON DELETE CASCADE,
+    CONSTRAINT `FK_detalleorden_prenda_PrendaIdFk` FOREIGN KEY (`PrendaIdFk`) REFERENCES `prenda` (`Id`) ON DELETE CASCADE
+) CHARACTER SET=utf8mb4;
+[2023-10-20 19:35:53.060 -05:00 INF] Executed DbCommand (44ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE `detalleventa` (
+    `Id` int NOT NULL AUTO_INCREMENT,
+    `cantidad` int NOT NULL,
+    `valorunitario` double NOT NULL,
+    `VentaIdFk` int NOT NULL,
+    `InventarioIdFk` int NOT NULL,
+    `TallaIdFk` int NOT NULL,
+    CONSTRAINT `PK_detalleventa` PRIMARY KEY (`Id`),
+    CONSTRAINT `FK_detalleventa_inventario_InventarioIdFk` FOREIGN KEY (`InventarioIdFk`) REFERENCES `inventario` (`Id`) ON DELETE CASCADE,
+    CONSTRAINT `FK_detalleventa_talla_TallaIdFk` FOREIGN KEY (`TallaIdFk`) REFERENCES `talla` (`Id`) ON DELETE CASCADE,
+    CONSTRAINT `FK_detalleventa_venta_VentaIdFk` FOREIGN KEY (`VentaIdFk`) REFERENCES `venta` (`Id`) ON DELETE CASCADE
+) CHARACTER SET=utf8mb4;
+[2023-10-20 19:35:53.093 -05:00 INF] Executed DbCommand (33ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_cliente_MunicipioIdFk` ON `cliente` (`MunicipioIdFk`);
+[2023-10-20 19:35:53.118 -05:00 INF] Executed DbCommand (25ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_cliente_TipoPersonaIdFk` ON `cliente` (`TipoPersonaIdFk`);
+[2023-10-20 19:35:53.142 -05:00 INF] Executed DbCommand (24ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_departamento_PaisFk` ON `departamento` (`PaisFk`);
+[2023-10-20 19:35:53.169 -05:00 INF] Executed DbCommand (27ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_detalleorden_ColorIdFk` ON `detalleorden` (`ColorIdFk`);
+[2023-10-20 19:35:53.188 -05:00 INF] Executed DbCommand (18ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_detalleorden_EstadoIdFk` ON `detalleorden` (`EstadoIdFk`);
+[2023-10-20 19:35:53.209 -05:00 INF] Executed DbCommand (20ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_detalleorden_OrdenIdFk` ON `detalleorden` (`OrdenIdFk`);
+[2023-10-20 19:35:53.228 -05:00 INF] Executed DbCommand (19ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_detalleorden_PrendaIdFk` ON `detalleorden` (`PrendaIdFk`);
+[2023-10-20 19:35:53.252 -05:00 INF] Executed DbCommand (23ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_detalleventa_InventarioIdFk` ON `detalleventa` (`InventarioIdFk`);
+[2023-10-20 19:35:53.269 -05:00 INF] Executed DbCommand (17ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_detalleventa_TallaIdFk` ON `detalleventa` (`TallaIdFk`);
+[2023-10-20 19:35:53.288 -05:00 INF] Executed DbCommand (19ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_detalleventa_VentaIdFk` ON `detalleventa` (`VentaIdFk`);
+[2023-10-20 19:35:53.323 -05:00 INF] Executed DbCommand (35ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_empleado_CargoIdFk` ON `empleado` (`CargoIdFk`);
+[2023-10-20 19:35:53.346 -05:00 INF] Executed DbCommand (23ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_empleado_MunicipioIdFk` ON `empleado` (`MunicipioIdFk`);
+[2023-10-20 19:35:53.365 -05:00 INF] Executed DbCommand (18ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_empresa_MunicipioIdFk` ON `empresa` (`MunicipioIdFk`);
+[2023-10-20 19:35:53.396 -05:00 INF] Executed DbCommand (31ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_estado_TipoEstadoIdFk` ON `estado` (`TipoEstadoIdFk`);
+[2023-10-20 19:35:53.417 -05:00 INF] Executed DbCommand (21ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_insumoprenda_InsumoId` ON `insumoprenda` (`InsumoId`);
+[2023-10-20 19:35:53.431 -05:00 INF] Executed DbCommand (14ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_insumoprenda_PrendaId` ON `insumoprenda` (`PrendaId`);
+[2023-10-20 19:35:53.457 -05:00 INF] Executed DbCommand (25ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_insumoproveedor_InsumoId` ON `insumoproveedor` (`InsumoId`);
+[2023-10-20 19:35:53.476 -05:00 INF] Executed DbCommand (19ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_insumoproveedor_ProvedorId` ON `insumoproveedor` (`ProvedorId`);
+[2023-10-20 19:35:53.508 -05:00 INF] Executed DbCommand (32ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_inventario_PrendaIdFk` ON `inventario` (`PrendaIdFk`);
+[2023-10-20 19:35:53.529 -05:00 INF] Executed DbCommand (21ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_inventariotalla_InventarioId` ON `inventariotalla` (`InventarioId`);
+[2023-10-20 19:35:53.546 -05:00 INF] Executed DbCommand (16ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_inventariotalla_TallaId` ON `inventariotalla` (`TallaId`);
+[2023-10-20 19:35:53.582 -05:00 INF] Executed DbCommand (36ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_municipio_DepartamentoIdFk` ON `municipio` (`DepartamentoIdFk`);
+[2023-10-20 19:35:53.611 -05:00 INF] Executed DbCommand (28ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_orden_ClienteIdFk` ON `orden` (`ClienteIdFk`);
+[2023-10-20 19:35:53.632 -05:00 INF] Executed DbCommand (21ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_orden_EmpleadoIdFk` ON `orden` (`EmpleadoIdFk`);
+[2023-10-20 19:35:53.657 -05:00 INF] Executed DbCommand (25ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_orden_EstadoIdFk` ON `orden` (`EstadoIdFk`);
+[2023-10-20 19:35:53.697 -05:00 INF] Executed DbCommand (39ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_prenda_EstadoIdFk` ON `prenda` (`EstadoIdFk`);
+[2023-10-20 19:35:53.734 -05:00 INF] Executed DbCommand (37ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_prenda_GeneroIdFk` ON `prenda` (`GeneroIdFk`);
+[2023-10-20 19:35:53.779 -05:00 INF] Executed DbCommand (44ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_prenda_TipoProteccionIdFk` ON `prenda` (`TipoProteccionIdFk`);
+[2023-10-20 19:35:53.806 -05:00 INF] Executed DbCommand (27ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_proveedor_MunicipioIdFk` ON `proveedor` (`MunicipioIdFk`);
+[2023-10-20 19:35:53.826 -05:00 INF] Executed DbCommand (20ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_proveedor_TipoPersonaIdFk` ON `proveedor` (`TipoPersonaIdFk`);
+[2023-10-20 19:35:53.847 -05:00 INF] Executed DbCommand (21ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_RefreshToken_UserId` ON `RefreshToken` (`UserId`);
+[2023-10-20 19:35:53.868 -05:00 INF] Executed DbCommand (21ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_userRol_RolId` ON `userRol` (`RolId`);
+[2023-10-20 19:35:53.896 -05:00 INF] Executed DbCommand (28ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_venta_ClienteIdFk` ON `venta` (`ClienteIdFk`);
+[2023-10-20 19:35:53.920 -05:00 INF] Executed DbCommand (24ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_venta_EmpleadoIdFk` ON `venta` (`EmpleadoIdFk`);
+[2023-10-20 19:35:53.942 -05:00 INF] Executed DbCommand (22ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX `IX_venta_FormaPagoIdFk` ON `venta` (`FormaPagoIdFk`);
+[2023-10-20 19:35:53.947 -05:00 INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO `__EFMigrationsHistory` (`MigrationId`, `ProductVersion`)
+VALUES ('20231021003529_initialmigration', '7.0.10');
